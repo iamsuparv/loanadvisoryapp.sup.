@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan Advisory App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Loan Advisory System</h1>
+        <form method="POST">
+            <label>Monthly Income (₹):</label>
+            <input type="number" name="income" required><br><br>
+
+            <label>Total Savings (₹):</label>
+            <input type="number" name="savings" required><br><br>
+
+            <label>Loan Amount (₹):</label>
+            <input type="number" name="loan_amount" required><br><br>
+
+            <label>Loan Tenure (Months):</label>
+            <input type="number" name="tenure" required><br><br>
+
+            <label>Loan Purpose:</label>
+            <select name="purpose">
+                <option>Home</option>
+                <option>Car</option>
+                <option>Education</option>
+                <option>Personal</option>
+                <option>Business</option>
+            </select><br><br>
+
+            <input type="submit" value="Get Advice">
+        </form>
+
+        {% if advice %}
+            <h2>Rule-Based Advice: {{ advice }}</h2>
+            <p>EMI: ₹{{ emi|round(2) }}</p>
+            <p>Debt-to-Income Ratio: {{ dti|round(2) }}%</p>
+        {% endif %}
+
+        {% if ml_status %}
+            <h2>ML Prediction: {{ ml_status }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
